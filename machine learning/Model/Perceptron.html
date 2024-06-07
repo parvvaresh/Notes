@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perceptron Algorithm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        .formula {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Perceptron Algorithm</h1>
+    <p>The Perceptron algorithm is a supervised learning algorithm used for binary classifiers, which are models that can decide whether an input, represented by a vector of numbers, belongs to one class or another. Here is a step-by-step outline of the Perceptron algorithm:</p>
+    
+    <h2>Perceptron Algorithm</h2>
+    <ol>
+        <li>
+            <h3>Initialize the weights and bias</h3>
+            <p>Initialize the weights <code>w</code> to zero or small random numbers.</p>
+            <p>Initialize the bias <code>b</code> to zero or a small random number.</p>
+        </li>
+        <li>
+            <h3>Define the activation function</h3>
+            <p>The activation function is usually a step function that returns +1 if the input is greater than or equal to zero, and -1 otherwise.</p>
+        </li>
+        <li>
+            <h3>Training the Perceptron</h3>
+            <p>Repeat until convergence or for a fixed number of epochs:</p>
+            <ol>
+                <li>
+                    <p>For each training example <code>(x_i, y_i)</code>:</p>
+                    <div class="formula">
+                        Calculate the output <code>y_hat</code> using the activation function:
+                        <br>
+                        <code>y_hat = sign(w &middot; x_i + b)</code>
+                    </div>
+                    <div class="formula">
+                        Update the weights and bias if there is a misclassification (i.e., <code>y_hat</code> is not equal to <code>y_i</code>):
+                        <br>
+                        <code>w &larr; w + η(y_i - y_hat) x_i</code>
+                        <br>
+                        <code>b &larr; b + η(y_i - y_hat)</code>
+                    </div>
+                    <p>Here, <code>η</code> is the learning rate.</p>
+                </li>
+            </ol>
+        </li>
+    </ol>
+</body>
+</html>
