@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comparison of Neural Networks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #333;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        p {
+            margin: 0;
+        }
+        .highlight {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <h2>Neural Networks (NNs)</h2>
+        <p>
+            Also known as <span class="highlight">feedforward neural networks (FFNNs)</span>.
+            <ul>
+                <li>Consist of an <span class="highlight">input layer, one or more hidden layers, and an output layer</span>.</li>
+                <li>Information flows in <span class="highlight">one direction, from input to output</span>.</li>
+                <li>Suitable for tasks where <span class="highlight">input and output are independent</span> or lack a sequential relationship.</li>
+                <li>Examples include <span class="highlight">image classification, regression tasks, etc.</span></li>
+            </ul>
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Recurrent Neural Networks (RNNs)</h2>
+        <p>
+            Designed to handle <span class="highlight">sequential data</span> where:
+            <ul>
+                <li>The current input depends on both the <span class="highlight">current state and past states (context)</span>.</li>
+                <li>Have connections forming <span class="highlight">cycles, exhibiting temporal dynamic behavior</span>.</li>
+                <li>Each neuron maintains an <span class="highlight">internal state as memory</span> to remember past information.</li>
+                <li>Suitable for tasks such as <span class="highlight">time series prediction, speech recognition, language modeling, etc.</span></li>
+                <li>However, vanilla RNNs suffer from issues like <span class="highlight">vanishing gradients and difficulty in learning long-term dependencies</span>.</li>
+            </ul>
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Artificial Neural Networks (ANNs)</h2>
+        <p>
+            General term encompassing both <span class="highlight">NNs and RNNs</span>, but typically refers to:
+            <ul>
+                <li>The broader class of <span class="highlight">machine learning models inspired by biological neurons</span>.</li>
+                <li>Includes architectures like <span class="highlight">CNNs, GANs, etc., in addition to NNs and RNNs</span>.</li>
+                <li>Used across various domains for <span class="highlight">pattern recognition, decision-making, and more</span>.</li>
+            </ul>
+        </p>
+    </div>
+</body>
+</html>
