@@ -494,3 +494,169 @@ SELECT *
 FROM Costumer 
 LIMIT 3;
 ```
+
+
+
+
+
+# SELECT TOP (SQL Server)
+
+The SELECT TOP clause is used to specify the number of records to return.
+
+The SELECT TOP clause is useful on large tables with thousands of records. Returning a large number of records can impact performance.
+
+## Syntax
+
+```sql
+SELECT TOP number|percent column_name(s)
+FROM table_name
+WHERE condition;
+```
+
+## Example
+
+The following SQL statement shows the equivalent example for MySQL:
+
+```sql
+SELECT * 
+FROM Costumer 
+LIMIT 3;
+```
+
+
+
+
+# SQL Aggregate Functions (Note)
+
+
+
+
+
+An aggregate function is a function that performs a calculation on a set of values, and returns a single value.
+
+Aggregate functions are often used with the GROUP BY clause of the SELECT statement. The GROUP BY clause splits the result-set into groups of values and the aggregate function can be used to return a single value for each group.
+
+The most commonly used SQL aggregate functions are:
+
+    - MIN() - returns the smallest value within the selected column
+    - MAX() - returns the largest value within the selected column
+    - COUNT() - returns the number of rows in a set
+    - SUM() - returns the total sum of a numerical column
+    - AVG() - returns the average value of a numerical column
+    - Aggregate functions ignore null values (except for COUNT()).
+
+
+
+# Join
+A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+
+Sure! Here's the explanation in English, with the same detailed examples:
+
+### 1. INNER JOIN
+**Definition:**
+An `INNER JOIN` returns only the records that have matching values in both tables. If a row exists in one table but does not have a match in the other table, it will not be included in the result.
+
+**Example:**
+Suppose we have the following two tables:
+
+- `Students` table:
+  | ID | Name  |
+  |----|-------|
+  | 1  | Ali   |
+  | 2  | Reza  |
+  | 3  | Sara  |
+
+- `Courses` table:
+  | ID | CourseName  |
+  |----|-------------|
+  | 1  | Math        |
+  | 2  | Physics     |
+  | 4  | Chemistry   |
+
+If we perform an `INNER JOIN` on these tables based on the `ID` column:
+
+```sql
+SELECT Students.Name, Courses.CourseName
+FROM Students
+INNER JOIN Courses ON Students.ID = Courses.ID;
+```
+
+**Result:**
+
+| Name | CourseName |
+|------|------------|
+| Ali  | Math       |
+| Reza | Physics    |
+
+Only the records with matching `ID` values in both tables are displayed.
+
+### 2. LEFT (OUTER) JOIN
+**Definition:**
+A `LEFT JOIN` returns all records from the left table (the first table listed), and the matched records from the right table. If there is no match in the right table, the result is `NULL` for those columns.
+
+**Example:**
+
+```sql
+SELECT Students.Name, Courses.CourseName
+FROM Students
+LEFT JOIN Courses ON Students.ID = Courses.ID;
+```
+
+**Result:**
+
+| Name | CourseName |
+|------|------------|
+| Ali  | Math       |
+| Reza | Physics    |
+| Sara | NULL       |
+
+In this example, Sara has no matching record in the `Courses` table, so `NULL` is displayed for her `CourseName`.
+
+### 3. RIGHT (OUTER) JOIN
+**Definition:**
+A `RIGHT JOIN` returns all records from the right table (the second table listed), and the matched records from the left table. If there is no match in the left table, the result is `NULL` for those columns.
+
+**Example:**
+
+```sql
+SELECT Students.Name, Courses.CourseName
+FROM Students
+RIGHT JOIN Courses ON Students.ID = Courses.ID;
+```
+
+**Result:**
+
+| Name | CourseName |
+|------|------------|
+| Ali  | Math       |
+| Reza | Physics    |
+| NULL | Chemistry  |
+
+Here, the `Courses` table includes a course (Chemistry) that has no matching student in the `Students` table, so `NULL` is displayed in the `Name` column.
+
+### 4. FULL (OUTER) JOIN
+**Definition:**
+A `FULL JOIN` returns all records when there is a match in either the left or right table. If there is no match, `NULL` is returned for the missing side.
+
+**Example:**
+
+```sql
+SELECT Students.Name, Courses.CourseName
+FROM Students
+FULL OUTER JOIN Courses ON Students.ID = Courses.ID;
+```
+
+**Result:**
+
+| Name | CourseName |
+|------|------------|
+| Ali  | Math       |
+| Reza | Physics    |
+| Sara | NULL       |
+| NULL | Chemistry  |
+
+In this result, all records from both tables are displayed, even if they do not match. For unmatched records, `NULL` is returned.
+
+These examples demonstrate how the different types of `JOIN` in SQL work and how they can be used to connect data from different tables.
+
+![type of join](./asset/join.png)
