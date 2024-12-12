@@ -116,3 +116,111 @@ Since containers are ephemeral (temporary), you can use **Docker volumes** to pe
 In summary:
 - **Docker Image**: A blueprint with everything needed to run an application.
 - **Docker Container**: A running instance of an image that is isolated and mutable during its lifetime. 
+
+
+
+### Steps to Install a Package or Modify Files in a Running Container:
+
+1. **Find the Container ID or Name:**
+   First, you need to know the container ID or name. To see the list of running containers, use the following command:
+   
+   ```bash
+   docker ps
+   ```
+
+   The output of this command will show details like `CONTAINER ID` and `NAMES` of the running containers.
+
+2. **Enter the Container (Using `docker exec`):**
+   Now, you can use the `docker exec` command to enter the container and apply the changes. To start a shell (e.g., `bash` or `sh`), use this command:
+   
+   ```bash
+   docker exec -it <container_id_or_name> bash
+   ```
+   
+   If the container does not support the `bash` shell, you can use `sh`:
+   
+   ```bash
+   docker exec -it <container_id_or_name> sh
+   ```
+
+   After running this command, you will be inside the container's command line and can make changes.
+
+3. **Install a Package or Modify a File Inside the Container:**
+
+   Once you're inside the container, you can install packages or modify files.
+
+   - **Install a package**: If the container is based on Ubuntu or Debian, you can install a package using `apt`:
+   
+     ```bash
+     apt-get update && apt-get install -y <package_name>
+     ```
+   
+     If the container is based on Alpine, use the `apk` package manager:
+   
+     ```bash
+     apk add --no-cache <package_name>
+     ```
+
+   - **Modify a file**: You can use text editors like `nano` or `vi` to edit files. If they are not installed, you can modify files using commands like `echo`:
+   
+     ```bash
+     echo "new content" > /path/to/file.txt
+     ```
+
+4. **Exit the Container:**
+   After applying the necessary changes, you can exit the container:
+   
+   ```bash
+   exit
+   ```
+
+### Practical Examples:
+
+#### 1. Install a Package (e.g., `curl`) Inside the Container:
+Suppose you have a container from an Ubuntu image and want to install `curl` inside it.
+
+- Enter the container:
+  ```bash
+  docker exec -it my-container bash
+  ```
+
+- Install the package:
+  ```bash
+  apt-get update && apt-get install -y curl
+  ```
+
+- Exit the container:
+  ```bash
+  exit
+  ```
+
+#### 2. Modify or Add Content to a File Inside the Container:
+Suppose you want to add text to the file `/app/log.txt` inside the container.
+
+- Enter the container:
+  ```bash
+  docker exec -it my-container bash
+  ```
+
+- Add content to the file:
+  ```bash
+  echo "This is a log entry" >> /app/log.txt
+  ```
+
+- Exit the container:
+  ```bash
+  exit
+  ```
+
+### Additional Notes:
+
+- The `docker exec` command allows you to enter a running container at any time without stopping it, making changes as needed.
+  
+- If you want to create a permanent image with your changes (e.g., installing a package), you can use the `docker commit` command to create a new image from the modified container:
+
+  ```bash
+  docker commit <container_id> <new_image_name>
+  ```
+
+- The `docker exec` command is for **temporary changes** inside a container. Any changes made inside the container will be lost once the container is removed.
+
