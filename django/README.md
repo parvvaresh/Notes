@@ -9,7 +9,7 @@ Models are defined as classes, and each class represents a table. Each property 
 
 Simple example:
 
-```
+```python
 from django.db import models
 
 class Book(models.Model):
@@ -28,7 +28,7 @@ You can use Django's Object Relationship Manager (ORM) to work with models.
 
 ### 1. Add data:
 
-```
+```python
 book = Book(title="Python Programming", author="John Doe", published_date="2023-01-01", price=49.99)
 book.save()  
 ```
@@ -36,20 +36,20 @@ book.save()
 
 
 #### .All data
-```
+```python
 books = Book.objects.all()
 ```
 
 #### .Filter Data
 
-'''
+'''python
 books = Book.objects.filter(author="John Doe")
 
 '''
 
 ### 3. Updata Data
 
-'''
+'''python
 book = Book.objects.get(id=1)  
 book.price = 59.99  
 book.save()  
@@ -57,7 +57,7 @@ book.save()
 
 ### 4. Delete Data
 
-```
+```python
 book = Book.objects.get(id=1)
 book.delete()
 ```
@@ -84,7 +84,7 @@ Models can be related to each other and you can easily define relationships.
 - Example of a One-to-Many relationship:
 An author can have multiple books:
 
-```
+```python
 class Author(models.Model):
     name = models.CharField(max_length=100)
 
@@ -97,7 +97,7 @@ class Book(models.Model):
 - Example of many-to-many relationship:
 A student can have several classes and a class can have several students:
 
-```
+```python
 class Student(models.Model):
     name = models.CharField(max_length=100)
 
@@ -274,4 +274,7 @@ python manage.py migrate
 | `python manage.py migrate`               | Apply migrations to the database.     |
 | `python manage.py showmigrations`        | View migration status.                |
 | `python manage.py migrate your_app_name 0001` | Roll back to a specific migration.    |
+
+
+
 
