@@ -278,3 +278,147 @@ python manage.py migrate
 
 
 
+
+
+# Forms
+Let me explain the difference between Model and Form in a simpler way with an example:
+
+
+## 1. Model:
+A model in Django represents the structure of your database. The model specifies what kind of data is stored in the database and how the data is related to each other.
+
+Model properties:
+It is responsible for defining and storing data in the database.
+It defines all the columns (fields) in the database tables.
+Example:
+Suppose you want to store information about blog posts on your site. To do this, you define a model:
+
+```python
+from django.db import models
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)  
+    content = models.TextField()            
+    created_at = models.DateTimeField(auto_now_add=True)  
+```
+
+This model tells you:
+
+- Each post has a title (text with a maximum of 200 characters).
+- Each post has content (longer text).
+- The creation date (created_at) is automatically saved.
+
+
+## 2. form
+A form is a tool used to receive data from the user and validate this data. A form helps you make sure that the data the user enters is correct and valid.
+
+Form Features:
+Responsible for receiving and processing user input.
+Receives data from the user and validates it (for example, checks that the email is valid).
+The data can be sent to a database or processed in some other way.
+Example:
+A form to get information about a blog post:
+
+```python
+from django import forms
+
+class PostForm(forms.Form):
+    title = forms.CharField(max_length=200, label="عنوان")
+    content = forms.CharField(widget=forms.Textarea, label="محتوا")
+```
+This form asks the user to:
+- Enter a title.
+- Write some content.
+
+
+Here’s the table explaining the main differences between **Model** and **Form** in English:
+
+| **Feature**          | **Model**                                     | **Form**                                     |
+|-----------------------|-----------------------------------------------|----------------------------------------------|
+| **Purpose**           | Defines the structure of data in the database | Captures and validates data from the user    |
+| **Usage**             | For storing and managing data in the database | For rendering forms in HTML and processing user input |
+| **Database Connection** | Direct (Model is directly tied to database tables) | Indirect (Form itself does not save data)    |
+
+In Django, Form is one of the key components used to manage and validate user input. Forms are used in Django in two main ways: regular forms and model forms.
+
+
+### 1. Forms:
+These types of forms are manually defined and are used to process data that is not necessarily associated with a model.
+
+Structure:
+To create a form, you must use the forms.Form class. Each field in the form is defined as an attribute that specifies the data type and its properties.
+
+
+```python
+from django import forms
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100, label='نام')
+    email = forms.EmailField(label='ایمیل')
+    message = forms.CharField(widget=forms.Textarea, label='پیام')
+```
+
+Description:
+- CharField: For text data.
+- EmailField: For email and its validation.
+- widget: To specify the HTML input type (e.g. Textarea for long texts).
+
+### 2. ModelForms:
+These types of forms are used to create forms that are directly connected to database models. ModelForms make things much easier because you don't need to manually define fields and can extract fields directly from the model.
+
+Structure:
+To create a modelform, the forms.ModelForm class is used.
+
+Let's say we have a model called Post:
+```python
+from django.db import models
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+```
+
+You can create a modelform for this model:
+```python
+from django import forms
+from .models import Post
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'content']
+
+```
+
+# Views
+In Django, Views are one of the main and key parts of the framework that are responsible for processing requests received from the user and returning the appropriate response to him. Views are actually a bridge between Models and Templates and manage the logic of the application.
+
+
+## Types of Views in Django:
+1. Function-based Views (FBV): 
+
+    is a simple function in Python that takes an HttpRequest object as input and returns an HttpResponse object.
+    This type of view is usually used for simple logic.
+
+    ```python
+    from django.http import HttpResponse
+
+    def my_view(request):
+        return HttpResponse("Hello, World!")
+    ```
+
+
+2. Class-based Views (CBV)
+    In this type of view, classes are used instead of functions. This approach makes the code more structured and extensible.
+    View-based classes inherit from the base View class, which is located in the django.views module.
+
+
+    ```python
+    from django.http import HttpResponse
+    from django.views import View
+
+    class MyView(View):
+        def get(self, request):
+            return HttpResponse("Hello, World!")
+    ```
