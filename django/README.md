@@ -422,3 +422,30 @@ In Django, Views are one of the main and key parts of the framework that are res
         def get(self, request):
             return HttpResponse("Hello, World!")
     ```
+
+3. Generic Views
+    Django provides a set of ready-made Generic Views that are used to perform common operations such as displaying a list, detailing an object, creating, updating, and deleting an object. These views reduce development time.
+    ```python 
+    from django.views.generic import ListView
+    from .models import MyModel
+
+    class MyModelListView(ListView):
+        model = MyModel
+        template_name = 'myapp/mymodel_list.html'
+
+    ```
+
+
+
+## How a View Works
+Receives a request:
+When a user requests a specific URL, Django first looks up the URL in the urls.py file and finds the corresponding View.
+
+Processes logic:
+The View (either a function or a class) executes the logic related to the request. This logic can include retrieving information from the database, validating data, or processing forms.
+
+Returns the response:
+Finally, the View returns a response (usually an HttpResponse or HTML page) to the user.
+
+
+
