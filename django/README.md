@@ -449,3 +449,43 @@ Finally, the View returns a response (usually an HttpResponse or HTML page) to t
 
 
 
+# Serializers
+In Django, Serializers are tools for converting data between different types (such as database models and JSON or XML formats). In other words, a serializer converts data from complex model forms into transportable formats (such as JSON), and also converts input data into formats that can be used in models.
+
+
+## Types of Serializers in Django
+
+1. Basic Serializer: This type of serializer converts simple and primitive data into various formats. For example, it converts a list of data (such as a dictionary or a list) into JSON format or other formats.
+
+Example:
+
+```python
+from rest_framework import serializers
+
+class PersonSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=100)
+    age = serializers.IntegerField()
+
+```
+
+
+2. ModelSerializer: This type of serializer is a faster and easier way to work with models. The ModelSerializer automatically serializes model fields, making it easier to convert data to and from Django models.
+
+
+```python
+from rest_framework import serializers
+from .models import Person
+
+class PersonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Person
+        fields = ['name', 'age']   
+
+```
+
+## Main uses of Serializers
+- Exchange data between client and server: Use formats like JSON to send and receive data.
+- Data validation: To ensure the correctness of data before storing it in the database.
+- Simplify API creation: Use ModelSerializer to quickly transform data and store it in the database.
+- Additional features and capabilities
+- Validation: You can add custom validations for data.
